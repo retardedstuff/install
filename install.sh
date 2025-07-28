@@ -11,7 +11,7 @@ cp -r dotfiles/home/retard/.config ~/.config
 
 # mount drives
 sudo mkdir -p /media/Dryden
-sudo printf "\n\n# /dev/nvme0n1p1 (Dryden)\n/dev/nvme0n1p1 /media/Dryden ext4 defaults 0 0" >> /etc/fstab
+sudo printf "\n\n# /dev/nvme0n1p1 (Dryden)\n/dev/nvme0n1p1 /media/Dryden ext4 defaults 0 0" | sudo tee -a /etc/fstab 
 sudo mount -a
 
 # enables 'color' and 'ilovecandy' in pacman.conf
