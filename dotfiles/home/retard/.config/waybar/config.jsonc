@@ -1,0 +1,69 @@
+{
+  "layer": "top",
+  "position": "top",
+
+  "modules-left": [
+    "hyprland/workspaces",
+    "hyprland/window",
+  ],
+
+  "modules-center": [
+  ],
+
+  "modules-right": [
+    "tray",
+    "clock",
+  ],
+
+  // Modules
+
+  "hyprland/workspaces": {
+    "all-outputs": false,
+    "disable-scroll": true,
+    "on-click": "activate",
+    "persistent-workspaces": {
+      "DP-1": [1],  // Center
+      "DP-1": [2],  //Center
+      "HDMI-A-1": [3],  // Left
+      "HDMI-A-1": [4],  //Left
+      "DP-2": [5],  // Right
+      "DP-2": [6],  // Right
+    },
+  },
+
+  "hyprland/window": {
+    "format": "{}",
+    "max-lenght": 70,
+    "icon": true,
+    "icon-size": 20,
+  },
+
+  "tray": {
+    "icon-size": 16,
+    "spacing": 12,
+  },
+
+  "clock": {
+    "format": "{:%A, %d|%m|%Y, %I:%M %p}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode"  : "year",
+      "mode-mon-col"  : 3,
+      "weeks-pos"     : "right",
+      "on-scroll"     : 1,
+      "format": {
+        "months":     "<span color='#ffead3'><b>{}</b></span>",
+        "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+        "today":      "<span color='#ff6699'><b><u>{}</u></b></span>",
+      }
+
+    },
+
+    "actions": {
+    }
+    
+  },
+
+}
