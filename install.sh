@@ -7,7 +7,7 @@ cd paru && makepkg -si --noconfirm && cd .. && rm -rf paru
 paru -S --noconfirm - < packages
 
 # copy dotfiles
-cp -r dotfiles/home/retard/.config ~/
+cp -r dotfiles/home/retard /home/retard
 
 # mount drives
 sudo mkdir -p /media/Dryden
