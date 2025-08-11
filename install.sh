@@ -3,6 +3,8 @@
 # installs paru + packages
 sudo pacman -Syu --noconfirm
 
+
+# checks for "paru" | if not found, downloads paru
 if command -v paru &> /dev/null; then
     aur_helper="paru"
 else
@@ -10,6 +12,7 @@ else
     cd paru && makepkg -si --noconfirm && cd .. && rm -rf paru
 fi
 
+# installs file "packages"
 paru -S --noconfirm - < packages
 
 # copy dotfiles
