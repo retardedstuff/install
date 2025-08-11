@@ -2,8 +2,14 @@
 
 # installs paru + packages
 sudo pacman -Syu --noconfirm
-git clone https://aur.archlinux.org/paru.git
-cd paru && makepkg -si --noconfirm && cd .. && rm -rf paru
+
+if command -v paru &> /dev/null; then
+    aur_helper="paru"
+else
+    git clone https://aur.archlinux.org/paru.git
+    cd paru && makepkg -si --noconfirm && cd .. && rm -rf paru
+fi
+
 paru -S --noconfirm - < packages
 
 # copy dotfiles
