@@ -61,7 +61,6 @@ if $download_packages; then
 else
 fi
 
-
 # dotfiles install script
 if $copy_dotfiles; then
     cp -r dotfiles/home/retard /home
