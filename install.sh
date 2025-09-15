@@ -1,18 +1,24 @@
 #!/bin/bash
 
-CAT="$(tput setaf 6)[ACTION]$(tput sgr0)"
+C0=$(tput setaf 0) # black
+C1=$(tput setaf 1) # red
+C2=$(tput setaf 2) # green
+C3=$(tput setaf 3) # orange
+C4=$(tput setaf 4) # dark blue
+C5=$(tput setaf 5) # pink
+C6=$(tput setaf 6) # light blue
+C7=$(tput setaf 7) # white
 
 # defaults
 download_packages=true
 copy_dotfiles=true
 mount_drives=true
 
-
 # update system before starting script
 sudo pacman -Syu --noconfirm
 
 # install package check
-read -n1 -rep "${CAT} Would you like to install the packages? (Y/n)" inst
+read -n1 -rep "Would you like to install the packages? (${C2}Y${C7}/${C7}n${C7})${C0}" inst
 echo
 
 if [[ $inst =~ ^[Nn]$ ]]; then
@@ -24,7 +30,7 @@ if [[ $inst =~ ^[Yy]$ ]]; then
 fi
 
 # copy dotfiles check
-read -n1 -rep "${CAT} Would you like to copy dotfiles (Y/n)" inst
+read -n1 -rep "Would you like to copy dotfiles (Y/n)" inst
 echo
 
 if [[ $inst =~ ^[Nn]$ ]]; then
@@ -36,7 +42,7 @@ if [[ $inst =~ ^[Yy]$ ]]; then
 fi
 
 # mounting drives check
-read -n1 -rep "${CAT} Would you like to mount '/dev/nvme0n1p1 (Y/n)" inst
+read -n1 -rep "Would you like to mount '/dev/nvme0n1p1 (Y/n)" inst
 echo
 
 if [[ $inst =~ ^[Nn]$ ]]; then
