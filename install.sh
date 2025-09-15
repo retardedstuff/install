@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CAT="$(tput setaf 6)[ACTION]$(tput sgr0)"
+
 # defaults
 download_packages=true
 copy_dotfiles=true
@@ -10,7 +12,7 @@ mount_drives=true
 sudo pacman -Syu --noconfirm
 
 # install package check
-read -n1 -rep "${CAT} Would you like to install the packages? (y/n)" inst
+read -n1 -rep "${CAT} Would you like to install the packages? (Y/n)" inst
 echo
 
 if [[ $inst =~ ^[Nn]$ ]]; then
@@ -22,7 +24,7 @@ if [[ $inst =~ ^[Yy]$ ]]; then
 fi
 
 # copy dotfiles check
-read -n1 -rep "${CAT} Would you like to copy dotfiles (y/n)" inst
+read -n1 -rep "${CAT} Would you like to copy dotfiles (Y/n)" inst
 echo
 
 if [[ $inst =~ ^[Nn]$ ]]; then
@@ -34,7 +36,7 @@ if [[ $inst =~ ^[Yy]$ ]]; then
 fi
 
 # mounting drives check
-read -n1 -rep "${CAT} Would you like to mount '/dev/nvme0n1p1 (y/n)" inst
+read -n1 -rep "${CAT} Would you like to mount '/dev/nvme0n1p1 (Y/n)" inst
 echo
 
 if [[ $inst =~ ^[Nn]$ ]]; then
