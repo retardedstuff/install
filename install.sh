@@ -9,7 +9,7 @@ mount_drives=true
 sudo pacman -Syu --noconfirm
 
 # install package check
-read -n1 -rep "Would you like to install the packages? (Y/n)" inst
+read -n1 -rep "Install packages? (Y/n)" inst
 echo
 
 if [[ $inst =~ ^[Nn]$ ]]; then
@@ -21,7 +21,7 @@ if [[ $inst =~ ^[Yy]$ ]]; then
 fi
 
 # copy dotfiles check
-read -n1 -rep "Would you like to copy dotfiles (Y/n)" inst
+read -n1 -rep "Install dotfiles (Y/n)" inst
 echo
 
 if [[ $inst =~ ^[Nn]$ ]]; then
@@ -33,7 +33,7 @@ if [[ $inst =~ ^[Yy]$ ]]; then
 fi
 
 # mounting drives check
-read -n1 -rep "Would you like to mount '/dev/nvme0n1p1 (Y/n)" inst
+read -n1 -rep "Mount '/dev/nvme0n1p1'? (Y/n)" inst
 echo
 
 if [[ $inst =~ ^[Nn]$ ]]; then
