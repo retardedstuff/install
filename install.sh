@@ -58,22 +58,16 @@ if $download_packages; then
      cd paru && makepkg -si --noconfirm && cd .. && rm -rf paru && aur_helper="paru"
     fi
     $aur_helper -S --noconfirm - < packages
-else
-fi
 
 # dotfiles install script
 if $copy_dotfiles; then
     cp -r dotfiles/home/retard /home
-else
-fi
 
 # drive mount script
 if $mount_drives; then
     sudo mkdir -p /media/Dryden
     sudo printf "\n\n# /dev/nvme0n1p1 (Dryden)\n/dev/nvme0n1p1 /media/Dryden ext4 defaults 0 0" | sudo tee -a /etc/fstab 
     sudo mount -a
-else
-fi
 
 # enables 'color' and 'ilovecandy' in pacman.conf
 sudo sed -i -e 's/#Color/Color\nILoveCandy/g' /etc/pacman.conf
