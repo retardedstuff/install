@@ -16,7 +16,7 @@ fi
 paru -S --noconfirm - < packages
 
 # copy dotfiles
-cp -r dotfiles/home/retard /home
+cp -r dotfiles/home/$USER /home
 
 # mount drives
 sudo mkdir -p /media/Dryden
