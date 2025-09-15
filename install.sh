@@ -58,7 +58,7 @@ if $download_packages; then
     fi
     $aur_helper -S --noconfirm - < packages
 else
-    printf "skipping packages"
+    printf "skipping packages \n"
     sleep 1
 fi
 
@@ -67,7 +67,7 @@ fi
 if $copy_dotfiles; then
     cp -r dotfiles/home/retard /home
 else
-    printf "skipping dotfiles"
+    printf "skipping dotfiles \n"
     sleep 1
 fi
 
@@ -77,7 +77,7 @@ if $mount_drives; then
     sudo printf "\n\n# /dev/nvme0n1p1 (Dryden)\n/dev/nvme0n1p1 /media/Dryden ext4 defaults 0 0" | sudo tee -a /etc/fstab 
     sudo mount -a
 else
-    printf "skipping drives"
+    printf "skipping drives \n"
     sleep 1
 fi
 
