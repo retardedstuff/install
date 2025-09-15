@@ -9,7 +9,7 @@ mount_drives=true
 sudo pacman -Syu --noconfirm
 
 # install package check
-read -n1 -rep "Install packages? (Y/n)" inst
+read -n1 -rep "Install extra packages? (Y/n)" inst
 echo
 
 if [[ $inst =~ ^[Nn]$ ]]; then
@@ -44,8 +44,10 @@ if [[ $inst =~ ^[Yy]$ ]]; then
     mount_drives=true
 fi
 
+# install core packages
+sudo pacman -S --noconfirm - < core
 
-# package install script | paru/yay check
+# paru/yay check | install extra packages
 if $download_packages; then
     if command -v paru &> /dev/null; then
      aur_helper="paru"
@@ -57,8 +59,6 @@ if $download_packages; then
     fi
     $aur_helper -S --noconfirm - < packages
 else
-    printf "skipping packages \n"
-    sleep 1
 fi
 
 
@@ -66,8 +66,6 @@ fi
 if $copy_dotfiles; then
     cp -r dotfiles/home/retard /home
 else
-    printf "skipping dotfiles \n"
-    sleep 1
 fi
 
 # drive mount script
@@ -76,8 +74,6 @@ if $mount_drives; then
     sudo printf "\n\n# /dev/nvme0n1p1 (Dryden)\n/dev/nvme0n1p1 /media/Dryden ext4 defaults 0 0" | sudo tee -a /etc/fstab 
     sudo mount -a
 else
-    printf "skipping drives \n"
-    sleep 1
 fi
 
 # enables 'color' and 'ilovecandy' in pacman.conf
