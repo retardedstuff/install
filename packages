@@ -1,7 +1,9 @@
 base-devel
 btop
 corectrl
+dotnet-runtime-6.0
 dotnet-runtime-7.0
+dotnet-runtime-8.0
 fastfetch
 ffmpegthumbnailer
 fish
