@@ -9,8 +9,8 @@ C5=$(tput setaf 5) # pink
 C6=$(tput setaf 6) # light blue
 C7=$(tput setaf 7) # white
 
-YES="$(tput setaf 2)[Y]$(tput sgr0)"
-NO="$(tput setaf 3)[N]$(tput sgr0)"
+YES="$(tput setaf 2)Y$(tput sgr0)"
+NO="$(tput sgr0)n"
 
 
 
@@ -23,7 +23,7 @@ mount_drives=true
 sudo pacman -Syu --noconfirm
 
 # install package check
-read -n1 -rep "Would you like to install the packages? (${YES}/${NO})" inst
+read -n1 -rep "${C6} Would you like to install the packages? (${YES}/${NO})" inst
 echo
 
 if [[ $inst =~ ^[Nn]$ ]]; then
