@@ -65,7 +65,7 @@ fi
 
 # dotfiles install script
 if $copy_dotfiles; then
-    cp -r dotfiles/home/$USER /home
+    cp -r dotfiles/home/retard /home
 else
     printf "skipping dotfiles"
     sleep 1
