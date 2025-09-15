@@ -9,6 +9,11 @@ C5=$(tput setaf 5) # pink
 C6=$(tput setaf 6) # light blue
 C7=$(tput setaf 7) # white
 
+YES="$(tput setaf 2)[Y]$(tput sgr0)"
+NO="$(tput setaf 3)[N]$(tput sgr0)"
+
+
+
 # defaults
 download_packages=true
 copy_dotfiles=true
@@ -18,7 +23,7 @@ mount_drives=true
 sudo pacman -Syu --noconfirm
 
 # install package check
-read -n1 -rep "Would you like to install the packages? (${C2}Y${C7}/${C7}n${C7})${C0}" inst
+read -n1 -rep "Would you like to install the packages? (${YES}/${NO})" inst
 echo
 
 if [[ $inst =~ ^[Nn]$ ]]; then
