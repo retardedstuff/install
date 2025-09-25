@@ -1,79 +1,63 @@
 #!/bin/bash
 
-# defaults
-download_packages=true
-copy_dotfiles=true
-mount_drives=true
+# Default settings
+DOWNLOAD_PACKAGES=true
+COPY_DOTFILES=true
+MOUNT_DRIVES=true
 
-# update system before starting script
+# Function to prompt user for confirmation
+prompt_user() {
+    read -n1 -rep "$1 (Y/n)" response
+    echo
+    case $response in
+        [Nn]) return 1 ;;
+        *) return 0 ;;
+    esac
+}
+
+# Update system before starting script
 sudo pacman -Syu --noconfirm
 
-# install package check
-read -n1 -rep "Install extra packages? (Y/n)" inst
-echo
+# Ask user if they want to install extra packages
+prompt_user "Install extra packages?" && DOWNLOAD_PACKAGES=true || DOWNLOAD_PACKAGES=false
 
-if [[ $inst =~ ^[Nn]$ ]]; then
-    download_packages=false
-fi
+# Ask user if they want to copy dotfiles
+prompt_user "Copy dotfiles?" && COPY_DOTFILES=true || COPY_DOTFILES=false
 
-if [[ $inst =~ ^[Yy]$ ]]; then
-    download_packages=true
-fi
+# Ask user if they want to mount drives
+prompt_user "Mount '/dev/nvme0n1p1'?" && MOUNT_DRIVES=true || MOUNT_DRIVES=false
 
-# copy dotfiles check
-read -n1 -rep "Install dotfiles (Y/n)" inst
-echo
-
-if [[ $inst =~ ^[Nn]$ ]]; then
-    copy_dotfiles=false
-fi
-
-if [[ $inst =~ ^[Yy]$ ]]; then
-    copy_dotfiles=true
-fi
-
-# mounting drives check
-read -n1 -rep "Mount '/dev/nvme0n1p1'? (Y/n)" inst
-echo
-
-if [[ $inst =~ ^[Nn]$ ]]; then
-    mount_drives=false
-fi
-
-if [[ $inst =~ ^[Yy]$ ]]; then
-    mount_drives=true
-fi
-
-# install core packages
+# Install core packages
 sudo pacman -S --noconfirm - < core
 
-# paru/yay check | install extra packages
-if $download_packages; then
+# Install extra packages using AUR helper
+if $DOWNLOAD_PACKAGES; then
     if command -v paru &> /dev/null; then
-     aur_helper="paru"
+        aur_helper="paru"
     elif command -v yay &> /dev/null; then
-     aur_helper="yay"
+        aur_helper="yay"
     else
-     git clone https://aur.archlinux.org/paru.git
-     cd paru && makepkg -si --noconfirm && cd .. && rm -rf paru && aur_helper="paru"
+        git clone https://aur.archlinux.org/paru.git
+        cd paru && makepkg -si --noconfirm && cd .. && rm -rf paru
+        aur_helper="paru"
     fi
     $aur_helper -S --noconfirm - < packages
 fi
 
-# dotfiles install script
-if $copy_dotfiles; then
+# Copy dotfiles to home directory
+if $COPY_DOTFILES; then
     cp -r dotfiles/home/retard /home
 fi
 
-# drive mount script
-if $mount_drives; then
+# Mount drive and update fstab
+if $MOUNT_DRIVES; then
     sudo mkdir -p /media/Dryden
-    sudo printf "\n\n# /dev/nvme0n1p1 (Dryden)\n/dev/nvme0n1p1 /media/Dryden ext4 defaults 0 0" | sudo tee -a /etc/fstab 
+    echo -e "\n\n# /dev/nvme0n1p1 (Dryden)\n/dev/nvme0n1p1 /media/Dryden ext4 defaults 0 0" | sudo tee -a /etc/fstab
     sudo mount -a
 fi
 
-# enables 'color' and 'ilovecandy' in pacman.conf
-sudo sed -i -e 's/#Color/Color\nILoveCandy/g' /etc/pacman.conf
+# Enable 'Color' and 'ILoveCandy' in pacman.conf
+sudo sed -i 's/#Color/Color\nILoveCandy/g' /etc/pacman.conf
 
-# inverts paru's list
-sudo sed -i -e 's/#BottomUp/BottomUp/g' /etc/paru.conf
+# Enable 'BottomUp' in paru.conf
+sudo sed -i 's/#BottomUp/BottomUp/g' /etc/paru.conf
